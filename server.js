@@ -20,8 +20,17 @@ const server = http.createServer((req, res) => {
   if (req.method === 'GET') {
     if (req.url === '/') {
       serveFile(res, path.join(__dirname, 'public', 'index.html'), 'text/html');
+ xhbt9p-codex/create-parking-app-with-slot-booking
+    } else if (req.url === '/bookings') {
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(bookings));
+    } else {
+      const parsed = new URL(req.url, `http://${req.headers.host}`);
+      const filePath = path.join(__dirname, 'public', parsed.pathname);
+
     } else {
       const filePath = path.join(__dirname, 'public', req.url);
+ main
       const ext = path.extname(filePath);
       const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript' };
       serveFile(res, filePath, types[ext] || 'application/octet-stream');
@@ -32,7 +41,12 @@ const server = http.createServer((req, res) => {
     req.on('end', () => {
       const params = new URLSearchParams(body);
       const slot = params.get('slot');
+ xhbt9p-codex/create-parking-app-with-slot-booking
+      const time = params.get('time');
+      bookings.push({ slot, time });
+=======
       bookings.push({ slot, time: new Date().toISOString() });
+main
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ success: true, slot }));
     });
