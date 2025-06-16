@@ -1,6 +1,6 @@
 # Parking App
 
-This is a simple Node.js web application that allows users to book a parking slot. The UI now includes styling and shows current bookings.
+This is a simple Node.js web application that allows users to book a parking slot. The interface is styled and also displays current bookings.
 
 ## Usage
 

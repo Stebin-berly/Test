@@ -24,7 +24,8 @@ const server = http.createServer((req, res) => {
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify(bookings));
     } else {
-      const filePath = path.join(__dirname, 'public', req.url);
+      const parsed = new URL(req.url, `http://${req.headers.host}`);
+      const filePath = path.join(__dirname, 'public', parsed.pathname);
       const ext = path.extname(filePath);
       const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript' };
       serveFile(res, filePath, types[ext] || 'application/octet-stream');
