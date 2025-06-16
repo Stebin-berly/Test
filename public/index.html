@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Parking App</title>
+</head>
+<body>
+  <h1>Parking Slot Booking</h1>
+  <form id="bookingForm">
+    <label for="slot">Slot number:</label>
+    <input type="text" id="slot" name="slot" required>
+    <button type="submit">Book Slot</button>
+  </form>
+  <div id="result"></div>
+  <script>
+    const form = document.getElementById('bookingForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new URLSearchParams(new FormData(form));
+      const res = await fetch('/book', {method: 'POST', body: formData});
+      if(res.ok){
+        const data = await res.json();
+        document.getElementById('result').textContent = `Booked slot: ${data.slot}`;
+      } else {
+        document.getElementById('result').textContent = 'Error booking slot';
+      }
+    });
+  </script>
+</body>
+</html>
