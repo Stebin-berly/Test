@@ -3,13 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>Parking App</title>
+xhbt9p-codex/create-parking-app-with-slot-booking
   <link rel="stylesheet" href="styles.css">
+
+ main
 </head>
 <body>
   <h1>Parking Slot Booking</h1>
   <form id="bookingForm">
     <label for="slot">Slot number:</label>
     <input type="text" id="slot" name="slot" required>
+ xhbt9p-codex/create-parking-app-with-slot-booking
     <label for="time">Time:</label>
     <input type="datetime-local" id="time" name="time" required>
     <button type="submit">Book Slot</button>
@@ -35,7 +39,11 @@
     }
 
     document.addEventListener('DOMContentLoaded', loadBookings);
-
+    <button type="submit">Book Slot</button>
+  </form>
+  <div id="result"></div>
+  <script>
+ main
     const form = document.getElementById('bookingForm');
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -44,8 +52,10 @@
       if(res.ok){
         const data = await res.json();
         document.getElementById('result').textContent = `Booked slot: ${data.slot}`;
+ xhbt9p-codex/create-parking-app-with-slot-booking
         form.reset();
         loadBookings();
+ main
       } else {
         document.getElementById('result').textContent = 'Error booking slot';
       }
